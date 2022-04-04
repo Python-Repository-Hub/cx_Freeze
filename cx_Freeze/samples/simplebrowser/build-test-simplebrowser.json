@@ -1,0 +1,6 @@
+{
+   "simplebrowser": {
+      "test_app": "gui:test_simplebrowser",
+      "requirements": "PySide2 --mingw=pyside2-qt5"
+   }
+}
