@@ -14,15 +14,15 @@ import warnings
 from pathlib import Path
 from typing import Optional
 
-from .command.bdist_rpm import bdist_rpm
-from .common import normalize_to_list
-from .freezer import Freezer
-from .module import ConstantsModule
+from cx_Freeze.command.bdist_rpm import bdist_rpm
+from cx_Freeze.common import normalize_to_list
+from cx_Freeze.freezer import Freezer
+from cx_Freeze.module import ConstantsModule
 
 if sys.platform == "win32":
-    from .windist import bdist_msi, winreg
+    from cx_Freeze.windist import bdist_msi, winreg
 elif sys.platform == "darwin":
-    from .macdist import bdist_dmg, bdist_mac
+    from cx_Freeze.macdist import bdist_dmg, bdist_mac
 
 __all__ = [
     "bdist_rpm",
