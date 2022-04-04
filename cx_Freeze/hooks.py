@@ -1110,6 +1110,34 @@ def load_PyQt5_QtUiTools(finder: ModuleFinder, module: Module) -> None:
     finder.include_module(f"{name}.QtWidgets")
 
 
+def load_PyQt5_QtWebEngine(finder: ModuleFinder, module: Module) -> None:
+    name = _qt_implementation(module)
+    finder.IncludeModule(f"{name}.QtWebEngineCore")
+
+
+def load_PyQt5_QtWebEngineCore(finder: ModuleFinder, module: Module) -> None:
+    name = _qt_implementation(module)
+    finder.IncludeModule(f"{name}.QtGui")
+    finder.IncludeModule(f"{name}.QtNetwork")
+
+
+def load_PyQt5_QtWebEngineWidgets(
+    finder: ModuleFinder, module: Module
+) -> None:
+    name = _qt_implementation(module)
+    finder.IncludeModule(f"{name}.QtWebChannel")
+    finder.IncludeModule(f"{name}.QtWebEngineCore")
+    finder.IncludeModule(f"{name}.QtPrintSupport")
+    if WIN32:
+        copy_qt_data(name, "QtWebEngineProcess.exe", finder)
+    else:
+        copy_qt_data(name, "libexec", finder)
+    copy_qt_data(name, "resources", finder)
+    copy_qt_data(name, "translations", finder)
+    copy_qt_plugins(name, "webview", finder)
+    copy_qt_plugins(name, "xcbglintegrations", finder)
+
+
 def load_PyQt5_QtWebKit(finder: ModuleFinder, module: Module) -> None:
     """This module depends on other modules."""
     name = _qt_implementation(module)
@@ -1169,6 +1197,9 @@ load_PySide2_QtSql = load_PyQt5_QtSql
 load_PySide2_QtSvg = load_PyQt5_QtSvg
 load_PySide2_QtTest = load_PyQt5_QtTest
 load_PySide2_QtUiTools = load_PyQt5_QtUiTools
+load_PySide2_QtWebEngine = load_PyQt5_QtWebEngine
+load_PySide2_QtWebEngineCore = load_PyQt5_QtWebEngineCore
+load_PySide2_QtWebEngineWidgets = load_PyQt5_QtWebEngineWidgets
 load_PySide2_QtWebKit = load_PyQt5_QtWebKit
 load_PySide2_QtWebSockets = load_PyQt5_QtWebSockets
 load_PySide2_QtWidgets = load_PyQt5_QtWidgets
